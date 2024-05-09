@@ -1,0 +1,22 @@
+.mat-mdc-header-row {
+  flex-wrap: wrap;
+}
+.mat-column-index {
+  flex: 0 0 50px;
+  width: auto;
+}
+
+.mat-column-title {
+  flex: 1;
+  width: auto;
+}
+
+.mat-column-date {
+  flex: unset;
+}
+
+.mat-column-progress {
+  flex: 0 0 100%;
+  min-height: 5px;
+  padding: 0;
+}

@@ -1,0 +1,35 @@
+<mat-table [dataSource]="items ?? []">
+  <ng-container matColumnDef="index">
+    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.protocolSection.identificationModule.officialTitle }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Submit date </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.protocolSection.statusModule.studyFirstSubmitDate }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="progress">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar
+    ></mat-header-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="['index', 'date', 'title', 'progress']">
+  </mat-header-row>
+  <mat-row
+    *matRowDef="
+      let row;
+      columns: ['index', 'date', 'title'];
+      let i = index
+    "></mat-row>
+</mat-table>
