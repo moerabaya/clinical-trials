@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, merge, Observable, timer } from 'rxjs';
-import { mergeMap, scan, map, tap } from 'rxjs/operators';
+import { mergeMap, scan, map, tap, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 export const TIME_DELAY = 5000;
 
@@ -40,7 +41,7 @@ export class StudyService {
   }
 
   fetchItems(pageSize: number, pageToken: string | null): Observable<Root> {
-    const url = 'https://clinicaltrials.gov/api/v2/studies';
+    const url = environment.api;
     const params = {
       pageSize: pageSize.toString(),
       fields: 'BriefTitle|OfficialTitle|StudyFirstSubmitDate',
@@ -52,6 +53,10 @@ export class StudyService {
       tap(res => {
         this.loading$.next(false);
         this.pageToken = res.nextPageToken;
+      }),
+      catchError(() => {
+        this.loading$.next(false);
+        throw Error('Something went wrong. Please try again later.');
       })
     );
   }
