@@ -20,3 +20,9 @@
   min-height: 5px;
   padding: 0;
 }
+
+.mat-mdc-row:first-child {
+  z-index: 10;
+  position: relative;
+  background-color: white;
+}

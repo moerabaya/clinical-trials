@@ -4,6 +4,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { StudyService } from '../../services/study/study.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-study-table',
@@ -11,6 +12,17 @@ import { StudyService } from '../../services/study/study.service';
   imports: [CommonModule, MatListModule, MatProgressBarModule, MatTableModule],
   templateUrl: './study-table.component.html',
   styleUrl: './study-table.component.scss',
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate(
+          '400ms ease-in-out',
+          style({ transform: 'translateY(0%)', opacity: 1 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class StudyTableComponent implements OnInit {
   items: Study[] | undefined;

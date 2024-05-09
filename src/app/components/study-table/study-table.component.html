@@ -1,11 +1,13 @@
 <mat-table [dataSource]="items ?? []">
   <ng-container matColumnDef="index">
     <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </mat-cell>
+    <mat-cell *matCellDef="let element; let i = index">
+      {{ i + 1 }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-header-cell cdkTrapFocus *matHeaderCellDef> Title </mat-header-cell>
     <mat-cell *matCellDef="let row">
       {{ row.protocolSection.identificationModule.officialTitle }}
     </mat-cell>
@@ -27,6 +29,7 @@
   <mat-header-row *matHeaderRowDef="['index', 'date', 'title', 'progress']">
   </mat-header-row>
   <mat-row
+    [@slideIn]
     *matRowDef="
       let row;
       columns: ['index', 'date', 'title'];
